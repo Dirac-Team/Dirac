@@ -1,6 +1,7 @@
+import { Button } from "./ui/button";
+import { ArrowRight } from "lucide-react";
 import { AnimatedSlogan } from "./AnimatedSlogan";
 import { ParticleBackground } from "./ParticleBackground";
-import { WaitlistSection } from "./WaitlistSection";
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 
@@ -18,12 +19,12 @@ export function HeroSection() {
     };
 
     handleResize();
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
@@ -42,7 +43,7 @@ export function HeroSection() {
               linear-gradient(rgba(120, 170, 255, 0.1) 1px, transparent 1px),
               linear-gradient(90deg, rgba(120, 170, 255, 0.1) 1px, transparent 1px)
             `,
-            backgroundSize: "50px 50px",
+            backgroundSize: '50px 50px',
             transform: `translate(${mousePosition.x * -0.01}px, ${mousePosition.y * -0.01}px)`
           }}
         />
@@ -59,8 +60,8 @@ export function HeroSection() {
           }}
           transition={{ type: "spring", damping: 50, stiffness: 200 }}
           style={{
-            left: "-50%",
-            top: "-50%",
+            left: '-50%',
+            top: '-50%',
           }}
         />
       ))}
@@ -122,7 +123,7 @@ export function HeroSection() {
                 <div className="absolute top-4 left-4 w-12 h-12 bg-white/8 rounded-full blur-xl animate-pulse" />
                 
                 {/* Secondary shine */}
-                <div className="absolute top-2 right-1/4 w-8 h-8 bg-[#78AAFF]/8 rounded-full blur-lg animate-pulse" style={{animationDelay: "1s"}} />
+                <div className="absolute top-2 right-1/4 w-8 h-8 bg-[#78AAFF]/8 rounded-full blur-lg animate-pulse" style={{animationDelay: '1s'}} />
                 
                 {/* Subtle reflection gradient */}
                 <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/5 via-white/2 to-transparent rounded-t-3xl" />
@@ -137,9 +138,9 @@ export function HeroSection() {
               
               {/* Floating particles around the sticker - smaller and more subtle */}
               <div className="absolute -top-1 -left-1 w-1.5 h-1.5 bg-[#78AAFF]/30 rounded-full animate-ping" />
-              <div className="absolute -top-0.5 -right-0.5 w-1 h-1 bg-white/30 rounded-full animate-pulse" style={{animationDelay: "0.5s"}} />
-              <div className="absolute -bottom-0.5 -left-0.5 w-1.5 h-1.5 bg-[#9BB5FF]/30 rounded-full animate-bounce" style={{animationDelay: "1s"}} />
-              <div className="absolute -bottom-0.25 -right-1 w-0.5 h-0.5 bg-white/20 rounded-full animate-pulse" style={{animationDelay: "1.5s"}} />
+              <div className="absolute -top-0.5 -right-0.5 w-1 h-1 bg-white/30 rounded-full animate-pulse" style={{animationDelay: '0.5s'}} />
+              <div className="absolute -bottom-0.5 -left-0.5 w-1.5 h-1.5 bg-[#9BB5FF]/30 rounded-full animate-bounce" style={{animationDelay: '1s'}} />
+              <div className="absolute -bottom-0.25 -right-1 w-0.5 h-0.5 bg-white/20 rounded-full animate-pulse" style={{animationDelay: '1.5s'}} />
             </div>
             
             Dirac
@@ -198,16 +199,30 @@ export function HeroSection() {
           Transform your workflow and amplify your creativity.
         </motion.p>
         
-        {/* Waitlist Section */}
+        {/* CTA buttons */}
         <motion.div 
-          className="flex justify-center items-center mb-20"
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <WaitlistSection />
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-[#78AAFF] to-[#9BB5FF] hover:from-[#6A9EFF] hover:to-[#8AABFF] text-white border-0 shadow-2xl px-10 py-7 text-lg group relative overflow-hidden"
+            >
+              {/* Button shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+              Join Waitlist
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </motion.div>
+          
         </motion.div>
       </div>
     </section>
   );
-} 
+}
